@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requirements &mdash; Google Cloud Service Extensions Samples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=652ae8bc" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Callout Tools" href="../extproc/service/callout_tools.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Google Cloud Service Extensions Samples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#quick-start">Quick start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running">Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#developing-callouts">Developing Callouts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#making-a-new-server">Making a new server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#additional-details">Additional Details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-proto-files">Using the proto files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#alternative-install-methods">Alternative Install Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#without-venv">Without <cite>venv</cite></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#without-installing-the-proto-code-as-a-local-package">Without installing the proto code as a local package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#tests">Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#docker">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SDK Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/service/callout_tools.html">Callout Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.add_body_mutation"><code class="docutils literal notranslate"><span class="pre">add_body_mutation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.add_command_line_args"><code class="docutils literal notranslate"><span class="pre">add_command_line_args()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.add_header_mutation"><code class="docutils literal notranslate"><span class="pre">add_header_mutation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.body_contains"><code class="docutils literal notranslate"><span class="pre">body_contains()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.deny_callout"><code class="docutils literal notranslate"><span class="pre">deny_callout()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.header_immediate_response"><code class="docutils literal notranslate"><span class="pre">header_immediate_response()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_tools.html#callouts.python.extproc.service.callout_tools.headers_contain"><code class="docutils literal notranslate"><span class="pre">headers_contain()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/service/callout_server.html">Callout Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer"><code class="docutils literal notranslate"><span class="pre">CalloutServer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.address"><code class="docutils literal notranslate"><span class="pre">CalloutServer.address</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.port"><code class="docutils literal notranslate"><span class="pre">CalloutServer.port</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.health_check_address"><code class="docutils literal notranslate"><span class="pre">CalloutServer.health_check_address</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.health_check_port"><code class="docutils literal notranslate"><span class="pre">CalloutServer.health_check_port</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.combined_health_check"><code class="docutils literal notranslate"><span class="pre">CalloutServer.combined_health_check</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.secure_health_check"><code class="docutils literal notranslate"><span class="pre">CalloutServer.secure_health_check</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.plaintext_address"><code class="docutils literal notranslate"><span class="pre">CalloutServer.plaintext_address</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.plaintext_port"><code class="docutils literal notranslate"><span class="pre">CalloutServer.plaintext_port</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.disable_plaintext"><code class="docutils literal notranslate"><span class="pre">CalloutServer.disable_plaintext</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.default_ip"><code class="docutils literal notranslate"><span class="pre">CalloutServer.default_ip</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.cert_chain"><code class="docutils literal notranslate"><span class="pre">CalloutServer.cert_chain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.cert_chain_path"><code class="docutils literal notranslate"><span class="pre">CalloutServer.cert_chain_path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.private_key"><code class="docutils literal notranslate"><span class="pre">CalloutServer.private_key</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.private_key_path"><code class="docutils literal notranslate"><span class="pre">CalloutServer.private_key_path</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.server_thread_count"><code class="docutils literal notranslate"><span class="pre">CalloutServer.server_thread_count</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.on_request_body"><code class="docutils literal notranslate"><span class="pre">CalloutServer.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServer.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.on_response_body"><code class="docutils literal notranslate"><span class="pre">CalloutServer.on_response_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.on_response_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServer.on_response_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.process"><code class="docutils literal notranslate"><span class="pre">CalloutServer.process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.run"><code class="docutils literal notranslate"><span class="pre">CalloutServer.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.CalloutServer.shutdown"><code class="docutils literal notranslate"><span class="pre">CalloutServer.shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.HealthCheckService"><code class="docutils literal notranslate"><span class="pre">HealthCheckService</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/service/callout_server.html#callouts.python.extproc.service.callout_server.HealthCheckService.do_GET"><code class="docutils literal notranslate"><span class="pre">HealthCheckService.do_GET()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/basic_callout_server.html">Basic Callout Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/basic_callout_server.html#callouts.python.extproc.example.basic_callout_server.BasicCalloutServer"><code class="docutils literal notranslate"><span class="pre">BasicCalloutServer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/basic_callout_server.html#callouts.python.extproc.example.basic_callout_server.BasicCalloutServer.on_request_body"><code class="docutils literal notranslate"><span class="pre">BasicCalloutServer.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/basic_callout_server.html#callouts.python.extproc.example.basic_callout_server.BasicCalloutServer.on_request_headers"><code class="docutils literal notranslate"><span class="pre">BasicCalloutServer.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/basic_callout_server.html#callouts.python.extproc.example.basic_callout_server.BasicCalloutServer.on_response_body"><code class="docutils literal notranslate"><span class="pre">BasicCalloutServer.on_response_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/basic_callout_server.html#callouts.python.extproc.example.basic_callout_server.BasicCalloutServer.on_response_headers"><code class="docutils literal notranslate"><span class="pre">BasicCalloutServer.on_response_headers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/add_body/service_callout_example.html">Add Body</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/add_body/service_callout_example.html#callouts.python.extproc.example.add_body.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_body/service_callout_example.html#callouts.python.extproc.example.add_body.service_callout_example.CalloutServerExample.on_request_body"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_body/service_callout_example.html#callouts.python.extproc.example.add_body.service_callout_example.CalloutServerExample.on_response_body"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_body()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/add_header/service_callout_example.html">Add Header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/add_header/service_callout_example.html#callouts.python.extproc.example.add_header.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_header/service_callout_example.html#callouts.python.extproc.example.add_header.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_header/service_callout_example.html#callouts.python.extproc.example.add_header.service_callout_example.CalloutServerExample.on_response_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_headers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/e2e_tests/metadata_server.html">Metadata Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/e2e_tests/metadata_server.html#callouts.python.extproc.example.e2e_tests.metadata_server.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/metadata_server.html#callouts.python.extproc.example.e2e_tests.metadata_server.CalloutServerExample.process"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.process()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/e2e_tests/metadata_server.html#callouts.python.extproc.example.e2e_tests.metadata_server.check_metadata"><code class="docutils literal notranslate"><span class="pre">check_metadata()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/e2e_tests/metadata_server.html#callouts.python.extproc.example.e2e_tests.metadata_server.unpack_string"><code class="docutils literal notranslate"><span class="pre">unpack_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html">Add Custom Response</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.CalloutServerExample.on_request_body"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.CalloutServerExample.on_response_body"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.CalloutServerExample.on_response_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_headers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.generate_mock_body_response"><code class="docutils literal notranslate"><span class="pre">generate_mock_body_response()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/add_custom_response/service_callout_example.html#callouts.python.extproc.example.add_custom_response.service_callout_example.generate_mock_header_response"><code class="docutils literal notranslate"><span class="pre">generate_mock_header_response()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/set_cookie/service_callout_example.html">Set Cookie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/set_cookie/service_callout_example.html#callouts.python.extproc.example.set_cookie.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/set_cookie/service_callout_example.html#callouts.python.extproc.example.set_cookie.service_callout_example.CalloutServerExample.on_response_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_headers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/set_cookie/service_callout_example.html#callouts.python.extproc.example.set_cookie.service_callout_example.validate_header"><code class="docutils literal notranslate"><span class="pre">validate_header()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/redirect/service_callout_example.html">Redirect</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/redirect/service_callout_example.html#callouts.python.extproc.example.redirect.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/redirect/service_callout_example.html#callouts.python.extproc.example.redirect.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/update_header/service_callout_example.html">Update Header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/update_header/service_callout_example.html#callouts.python.extproc.example.update_header.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/update_header/service_callout_example.html#callouts.python.extproc.example.update_header.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/update_header/service_callout_example.html#callouts.python.extproc.example.update_header.service_callout_example.CalloutServerExample.on_response_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_response_headers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/cloud_log/service_callout_example.html">Cloud Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/cloud_log/service_callout_example.html#callouts.python.extproc.example.cloud_log.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/cloud_log/service_callout_example.html#callouts.python.extproc.example.cloud_log.service_callout_example.CalloutServerExample.on_request_body"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/cloud_log/service_callout_example.html#callouts.python.extproc.example.cloud_log.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/jwt_auth/service_callout_example.html">JWT Auth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/jwt_auth/service_callout_example.html#callouts.python.extproc.example.jwt_auth.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/jwt_auth/service_callout_example.html#callouts.python.extproc.example.jwt_auth.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/jwt_auth/service_callout_example.html#callouts.python.extproc.example.jwt_auth.service_callout_example.extract_jwt_token"><code class="docutils literal notranslate"><span class="pre">extract_jwt_token()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/jwt_auth/service_callout_example.html#callouts.python.extproc.example.jwt_auth.service_callout_example.validate_jwt_token"><code class="docutils literal notranslate"><span class="pre">validate_jwt_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html">Observability Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample.on_request_body"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample.on_request_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample.on_request_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample.on_response_body"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample.on_response_body()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample.on_response_headers"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample.on_response_headers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.ObservabilityServerExample.shutdown"><code class="docutils literal notranslate"><span class="pre">ObservabilityServerExample.shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.RequestHandler"><code class="docutils literal notranslate"><span class="pre">RequestHandler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/e2e_tests/observability_server.html#callouts.python.extproc.example.e2e_tests.observability_server.RequestHandler.do_GET"><code class="docutils literal notranslate"><span class="pre">RequestHandler.do_GET()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extproc/normalize_header/service_callout_example.html">Normalize Header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/normalize_header/service_callout_example.html#callouts.python.extproc.example.normalize_header.service_callout_example.CalloutServerExample"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/normalize_header/service_callout_example.html#callouts.python.extproc.example.normalize_header.service_callout_example.CalloutServerExample.add_device_type_header"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.add_device_type_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extproc/normalize_header/service_callout_example.html#callouts.python.extproc.example.normalize_header.service_callout_example.CalloutServerExample.on_request_headers"><code class="docutils literal notranslate"><span class="pre">CalloutServerExample.on_request_headers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extproc/normalize_header/service_callout_example.html#callouts.python.extproc.example.normalize_header.service_callout_example.get_device_type"><code class="docutils literal notranslate"><span class="pre">get_device_type()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Google Cloud Service Extensions Samples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Requirements</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/GoogleCloudPlatform/service-extensions-samples/blob/main/docs/readme/setup.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Python 3.11+</p></li>
+<li><p><cite>buf &lt;https://buf.build/docs/introduction&gt;</cite></p></li>
+<li><p><cite>requirements.txt &lt;./requirements.txt&gt;</cite></p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h1>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h1>
+<p>The minimal operation of this Python-based ext_proc server requires the <cite>grpcio</cite> python package as well as the protobuf generator tool <cite>buf &lt;https://buf.build/docs/introduction&gt;</cite>.</p>
+<p>The preferred method of installation is through a virtual environment, <cite>venv</cite>. To set up the virtual environment run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>env
+<span class="nb">source</span><span class="w"> </span>env/bin<span class="w"> </span>activate
+</pre></div>
+</div>
+<p>Then the packages can be installed with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>And if you want to run tests:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-test.txt
+</pre></div>
+</div>
+<p><cite>buf</cite> can be installed from <cite>here &lt;https://buf.build/docs/installation&gt;</cite>.</p>
+<p>The proto library files are generated with <cite>buf</cite> using:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>buf<span class="w"> </span>-v<span class="w"> </span>generate<span class="w"> </span>https://github.com/envoyproxy/envoy.git#subdir<span class="o">=</span>api<span class="w"> </span>--path<span class="w"> </span>envoy/service/ext_proc/v3/external_processor.proto<span class="w"> </span>--include-imports
+</pre></div>
+</div>
+<p>The proto files are then installed as a local package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>./protodef
+</pre></div>
+</div>
+<p>We install the proto files as a local package to allow for absolute imports within the generated python code.</p>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading"></a></h2>
+<p>Example servers can be started from the <cite>extproc/example/&lt;…&gt;</cite> submodules. For example, the grpc <cite>service_callout_example</cite> server can be started with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>extproc.example.grpc.service_callout_example
+</pre></div>
+</div>
+<p>The server will then run until interrupted, for example, by inputting <cite>Ctrl-C</cite>.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Examples for various styles of callout server are located under <cite>extproc/example/</cite>.</p>
+</section>
+</section>
+<section id="developing-callouts">
+<h1>Developing Callouts<a class="headerlink" href="#developing-callouts" title="Link to this heading"></a></h1>
+<p>This repository provides the following files to be extended to fit the needs of the user:</p>
+<ul class="simple">
+<li><p><cite>extproc/service/callout_server.py &lt;extproc/service/callout_server.py&gt;</cite>: Baseline service callout server.</p></li>
+<li><p><cite>extproc/service/callout_tools.py &lt;extproc/service/callout_tools.py&gt;</cite>: Common functions used in many callout server code paths.</p></li>
+</ul>
+<section id="making-a-new-server">
+<h2>Making a new server<a class="headerlink" href="#making-a-new-server" title="Link to this heading"></a></h2>
+<p>Create a new python script <cite>server.py</cite> and import the <cite>CalloutServer</cite> class from <cite>extproc/service/callout_server.py</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">extproc.service.callout_server</span> <span class="kn">import</span> <span class="n">CalloutServer</span>
+</pre></div>
+</div>
+<p>Just from importing the server class we can make the server run by creating a new instance and calling the blocking function <cite>run</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">CalloutServer</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Calling the server like this won’t do much besides respond to health checks though. In order for the server to respond to requests, we need to create a custom class extending <cite>CalloutServer</cite>.</p>
+<p>Make a class extending <cite>CalloutServer</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BasicCalloutServer</span><span class="p">(</span><span class="n">CalloutServer</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>There are a few callback methods in <cite>CalloutServer</cite> provided for developers to override:</p>
+<ul class="simple">
+<li><p><cite>on_request_headers</cite>: Process request headers.</p></li>
+<li><p><cite>on_response_headers</cite>: Process response headers.</p></li>
+<li><p><cite>on_request_body</cite>: Process request body.</p></li>
+<li><p><cite>on_response_body</cite>: Process response body.</p></li>
+</ul>
+<p>These functions correspond to the <cite>oneof</cite> required field in a <cite>ProcessingRequest</cite> and required response field of a <cite>ProcessingResponse</cite>.</p>
+<p>When a given type of data is received, the corresponding function is called on this server. To hook into that call, override the method, for example in <cite>BasicCalloutServer</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BasicCalloutServer</span><span class="p">(</span><span class="n">CalloutServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_response_headers</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">HttpHeaders</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">ServicerContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HeadersResponse</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>A few things to note here, we are strongly typing our variables with the expected types. This requires the following imports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">grpc</span> <span class="kn">import</span> <span class="n">ServicerContext</span>
+<span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3.external_processor_pb2</span> <span class="kn">import</span> <span class="n">HeadersResponse</span>
+<span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3.external_processor_pb2</span> <span class="kn">import</span> <span class="n">HttpHeaders</span>
+</pre></div>
+</div>
+<p>See <cite>Using the proto files</cite> for more details.</p>
+<p>Each of the callback methods provides the given data type as an input parameter and expects the corresponding response to be returned. For example, <cite>on_response_headers</cite>:</p>
+<ul class="simple">
+<li><p><cite>headers</cite>: <cite>response_headers</cite> data from <cite>ProcessingRequest</cite>.</p></li>
+<li><p><cite>context</cite>: associated grpc data.</p></li>
+<li><p><cite>return</cite>: <cite>response_headers</cite> data from <cite>ProcessingResponse</cite>.</p></li>
+</ul>
+<p>There are methods specified under <cite>extproc/service/callout_tools.py</cite> that will help in creating a response to the request. Import those with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">extproc.service.callout_tools</span> <span class="kn">import</span> <span class="n">add_header_mutation</span>
+</pre></div>
+</div>
+<p>With the callout from before we can add the <cite>foo:bar</cite> header mutation on incoming <cite>response_headers</cite> requests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BasicCalloutServer</span><span class="p">(</span><span class="n">CalloutServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_response_headers</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">HttpHeaders</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">ServicerContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HeadersResponse</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">add_header_mutation</span><span class="p">(</span><span class="n">add</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><cite>add_header_mutation</cite> also has parameters for removing (<cite>remove</cite>) and cache clearing (<cite>clear_route_cache</cite>). See <cite>extproc/service/callout_tools.py</cite>.</p>
+<p>The callout server uses the <cite>logging</cite> module. By default, this means that nothing is logged to the terminal on standard use. We recommend setting the logging level to <cite>INFO</cite> so that normal server operation is visible.</p>
+<p>All together that is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">grpc</span> <span class="kn">import</span> <span class="n">ServicerContext</span>
+<span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3.external_processor_pb2</span> <span class="kn">import</span> <span class="n">HeadersResponse</span>
+<span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3.external_processor_pb2</span> <span class="kn">import</span> <span class="n">HttpHeaders</span>
+<span class="kn">from</span> <span class="nn">extproc.service.callout_server</span> <span class="kn">import</span> <span class="n">CalloutServer</span>
+
+<span class="k">class</span> <span class="nc">BasicCalloutServer</span><span class="p">(</span><span class="n">CalloutServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_response_headers</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">HttpHeaders</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">ServicerContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HeadersResponse</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">add_header_mutation</span><span class="p">(</span><span class="n">add</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)])</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="n">BasicCalloutServer</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Saving to file <cite>server.py</cite>, the callout server can be run with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>server
+</pre></div>
+</div>
+</section>
+</section>
+<section id="additional-details">
+<h1>Additional Details<a class="headerlink" href="#additional-details" title="Link to this heading"></a></h1>
+<p><cite>CalloutServer</cite> has many options to customize the security information as well as port settings. The default <cite>CalloutServer</cite> listens on port <cite>8443</cite> for grpc traffic, <cite>8000</cite> for health checks, and <cite>8080</cite> for insecure traffic. Please see the <cite>CalloutServer</cite> docstring for more information.</p>
+<p>The <cite>on_request_headers</cite> and <cite>on_request_body</cite> methods also accept <cite>ImmediateResponse</cite> values as a return value.</p>
+<p><cite>CalloutServer</cite> also contains a <cite>process</cite> method that can be overridden to work directly on incoming <cite>ProcessingRequest</cite> s.</p>
+<section id="using-the-proto-files">
+<h2>Using the proto files<a class="headerlink" href="#using-the-proto-files" title="Link to this heading"></a></h2>
+<p>The python classes can be imported using the relative <cite>envoy/api</cite> path:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3</span> <span class="kn">import</span> <span class="n">external_processor_pb2</span>
+</pre></div>
+</div>
+<p>For example, to import the <cite>HeadersResponse</cite> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">envoy.service.ext_proc.v3.external_processor_pb2</span> <span class="kn">import</span> <span class="n">HeadersResponse</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="alternative-install-methods">
+<h1>Alternative Install Methods<a class="headerlink" href="#alternative-install-methods" title="Link to this heading"></a></h1>
+<section id="without-venv">
+<h2>Without <cite>venv</cite><a class="headerlink" href="#without-venv" title="Link to this heading"></a></h2>
+<p>Alternatively, the packages can be installed through the package manager:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-grpcio<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>And the protobuf library with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>./protodef
+</pre></div>
+</div>
+<p>WARNING! Installing the <cite>protodef</cite> package to your system outside of a <cite>venv</cite> could cause unintentional side effects. Only do this if you are inside of a self-contained environment or you know what you are doing.</p>
+</section>
+<section id="without-installing-the-proto-code-as-a-local-package">
+<h2>Without installing the proto code as a local package<a class="headerlink" href="#without-installing-the-proto-code-as-a-local-package" title="Link to this heading"></a></h2>
+<p>Alternatively, rather than installing through pip, the proto code can be placed in the root of this project and imported directly.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>buf<span class="w"> </span>-v<span class="w"> </span>generate<span class="w"> </span>https://github.com/envoyproxy/envoy.git#subdir<span class="o">=</span>api<span class="w"> </span>--path<span class="w"> </span>envoy/service/ext_proc/v3/external_processor.proto<span class="w"> </span>--include-imports<span class="w"> </span>-o<span class="w"> </span>out
+mv<span class="w"> </span>./out/protodef/*<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tests">
+<h1>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h1>
+<p>Tests can be run with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</section>
+<section id="docker">
+<h1>Docker<a class="headerlink" href="#docker" title="Link to this heading"></a></h1>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading"></a></h2>
+<p>The basic docker image contains arguments for pointing to and running python modules. For example, to build <cite>extproc/example/basic_callout_server.py</cite> into a run-able docker image:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>./extproc/example/Dockerfile<span class="w"> </span>-t<span class="w"> </span>service-callout-example-python<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">copy_path</span><span class="o">=</span>extproc/example/basic_callout_server.py<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">run_module</span><span class="o">=</span>basic_callout_server<span class="w"> </span>.
+</pre></div>
+</div>
+<p>–build-arg:
+* <cite>copy_path</cite>: Path of python files required on the docker image.
+* <cite>run_module</cite>: The module to run on startup.</p>
+<p>This image will copy <cite>extproc/example/basic_callout_server.py</cite> to the base directory and runs it as <cite>basic_callout_server</cite>.</p>
+<p>The image can then be run with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-P<span class="w"> </span>-it<span class="w"> </span>service-callout-example-python:latest
+</pre></div>
+</div>
+<p>In this example, using the <cite>-P</cite> flag tells docker to connect the exposed ports to the local machine’s ports. Setting</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../extproc/service/callout_tools.html" class="btn btn-neutral float-right" title="Callout Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Google LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
