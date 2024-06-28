@@ -71,6 +71,22 @@ http_archive(
     urls = ["https://storage.googleapis.com/quiche-envoy-integration/dd4080fec0b443296c0ed0036e1e776df8813aa7.tar.gz"],
 )
 
+# Include lexbor for HTML parsing
+http_archive(
+    name = "lexbor",
+    sha256 = "26a8819b60801301df92d771f12a01dbe8705a7a",
+    strip_prefix = "lexbor-2.3.0",
+    url = "https://github.com/lexbor/lexbor/archive/refs/tags/v2.3.0.tar.gz",
+)
+
+# Include libxml2 for HTML parsing
+http_archive(
+    name = "libxml2",
+    sha256 = "58a973c40ba927e5ad941789723da7c47a2d60e3",
+    strip_prefix = "libxml2-v2.11.8",
+    url = "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.11.8/libxml2-v2.11.8.tar.gz",
+)
+
 # --- PLUGIN DEPENDENCIES ---
 
 PROXY_WASM_CPP_HOST_COMMIT = "04dfb94747e6462b65f7ed694e2d9c78ab207e11"  # 2024-04-29
@@ -95,21 +111,6 @@ http_archive(
     url = "https://github.com/proxy-wasm/proxy-wasm-cpp-sdk/archive/" + PROXY_WASM_CPP_SDK_COMMIT + ".tar.gz",
 )
 
-# Include lexbor for HTML parsing
-http_archive(
-    name = "lexbor",
-    sha256 = "26a8819b60801301df92d771f12a01dbe8705a7a",
-    strip_prefix = "lexbor-2.3.0",
-    url = "https://github.com/lexbor/lexbor/archive/refs/tags/v2.3.0.tar.gz",
-)
-
-# Include libxml2 for HTML parsing
-http_archive(
-    name = "libxml2",
-    sha256 = "58a973c40ba927e5ad941789723da7c47a2d60e3",
-    strip_prefix = "libxml2-v2.11.8",
-    url = "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.11.8/libxml2-v2.11.8.tar.gz",
-)
 # Duplicate the ProxyWasm WORKSPACE files (dependencies)
 # Consider adopting bzlmod for this: https://docs.bazel.build/versions/5.0.0/bzlmod.html
 load("@proxy_wasm_cpp_host//bazel:repositories.bzl", "proxy_wasm_cpp_host_repositories")
