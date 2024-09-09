@@ -63,6 +63,9 @@ for your own plugin. Extend them to fit your particular use case.
 *   [Normalize a HTTP header on request](samples/normalize_header): Creates a new
     HTTP header (client-device-type) to shard requests based on device according
     to the existence of HTTP Client Hints or User-Agent header values.
+*   [Block request with particular header](samples/block_request): Check whether
+    the client's Referer header matches an expected domain. If not, generate a 403
+    Forbidden response.
 
 # Samples tests
 
