@@ -66,6 +66,8 @@ for your own plugin. Extend them to fit your particular use case.
 *   [Overwrite origin response error code](samples/overwrite_errcode): Overwrites
     error code served from origin from 5xx error to 4xx error class.
 *   [Perform a HTTP redirect](samples/redirect): Redirect a given URL to another URL.
+*   [Set a cookie for a given client request](samples/set_cookie): Set cookie on
+    HTTP response for a particular client request.
 
 # Samples tests
 
